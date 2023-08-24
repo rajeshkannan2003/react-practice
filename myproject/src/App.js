@@ -1,89 +1,101 @@
-// import React from 'react';
-// import { BrowserRouter, Route ,Routes } from 'react-router-dom';
-// import './App.css';
-// import "./Css/Style.css";
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import Login from './Components/Login';
-// import Header from './Components/Header';
 
+import React from 'react';
+import Props from './Props';
+import data from './Data';
+import Pager from './Pager';
+import "../src/Css/Style.css";
+import Carousel from './Carousel';
 
-// function App() {
-//   return (
-//     <div className="App">
-         
-      
-//       <BrowserRouter>
-
-//        <Header/>
-
-      
-
-//       <Routes>
-//         <Route exact path="/" element={<Login /> } />
+// const allData=(values)=>{
+//     return(
+//         <>
+//         <Props 
+//                    imgsrc={values.imgsrc}
+//                    title={values.title}
+//                    text= {values.text}
+//                    btn={values.btn}
+//                 />
         
-        
-
-//       </Routes>
-      
-
-      
-//       </BrowserRouter>
-
-      
-       
-//     </div>
-//   );
+//         </>
+//     )
 // }
 
-// export default App;
-import React, { useState } from 'react';
-import './Css/Style.css';
+   
 
-function App() {
-  const [slots, setSlots] = useState(Array(10).fill(false));
-  const [selectedSlot, setSelectedSlot] = useState(null);
+const App=() => {
+    return(
+        <>
+         <Carousel />
+        <div className='container mt-5'>
+            <div className='row'>
+           
+            
+                {/* 
+                before using MAP method to folloe this method
+                <Props 
+                   imgsrc={values.imgsrc}
+                   title={values.title}
+                   text= {values.text}
+                   btn={values.btn}
+                />
+                <Props 
+                   imgsrc={data[1].imgsrc}
+                   title={data[1].title}
+                   text= {data[1].text}
+                   btn={data[1].btn}
+                />
+                <Props 
+                   imgsrc={data[2].imgsrc}
+                   title={data[2].title}
+                   text= {data[2].text}
+                   btn={data[2].btn}
+                />
+                <Props 
+                   imgsrc={data[3].imgsrc}
+                   title={data[3].title}
+                   text= {data[3].text}
+                   btn={data[3].btn}
+                /> */}
+               
+                {/* 
+                to not use array of object to use this method
+                <Props 
+                    imgsrc="./images/img3.jpg"
+                    title="Dell book"
+                    text="Some quick example text to build on the card title and make up the bulk of the card's content"
+                    btn="Read more"
+                />  */}
+                {/* {data.map(allData)} */}
+                {data.map((values)=>{
+                return(
+                    <>
+                    <Props 
+                    key={values.id}
+                    id={values.id}
+                    imgsrc={values.imgsrc}
+                    title={values.title}
+                    text= {values.text}
+                    btn={values.btn}
+                 />
+                 
+                    </>
 
-  const handleSlotClick = (index) => {
-    if (!slots[index]) {
-      setSelectedSlot(index);
-    }
-  };
+                )
+               
+                   
+                
 
-  const handleConfirm = () => {
-    const updatedSlots = [...slots];
-    updatedSlots[selectedSlot] = true;
-    setSlots(updatedSlots);
-    setSelectedSlot(null);
-  };
+            })}
+            
+                
+                
+            </div>
+            </div>
+        
 
-  const handleCancel = () => {
-    setSelectedSlot(null);
-  };
+        </>
 
-  return (
-    <div className="App">
-      <h1>Car Parking Slots</h1>
-      <div className="parking-lot">
-        {slots.map((slot, index) => (
-          <div
-            key={index}
-            className={`slot ${slot ? 'occupied' : ''} ${
-              selectedSlot === index ? 'selected' : ''
-            }`}
-            onClick={() => handleSlotClick(index)}
-          >
-            {index + 1}
-          </div>
-        ))}
-      </div>
-      {selectedSlot !== null && (
-        <div className="actions">
-          <button onClick={handleConfirm}>Park Car</button>
-          <button onClick={handleCancel}>Cancel</button>
-        </div>
-      )}
-    </div>
-  );
+    )  
 }
 
 export default App;
